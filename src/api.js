@@ -5,7 +5,7 @@ const createDeployment = (bearerToken, gitRef, sourceUrl) => fetch(`${apiUrl}/v1
   method: 'POST',
   body: JSON.stringify({
     deployment: {
-      git_ref: gitRef,
+      // git_ref: gitRef,
       source_url: sourceUrl,
     },
   }),
