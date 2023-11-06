@@ -2,12 +2,12 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const { apiUrl, token, appName } = require('./constants');
 
-const createDeployment = (bearerToken, gitRef) => fetch(`${apiUrl}/v1/apps/${appName}/deployments`, {
+const createDeployment = (bearerToken, gitRef, sourceUrl) => fetch(`${apiUrl}/v1/apps/${appName}/deployments`, {
   method: 'POST',
   body: JSON.stringify({
     deployment: {
       git_ref: gitRef,
-      source_url: `${github.context.serverUrl}/${github.context.repo.owner}/${github.context.repo.repo}/archive/${github.context.ref}.tar.gz`,
+      source_url: sourceUrl,
     },
   }),
   headers: {

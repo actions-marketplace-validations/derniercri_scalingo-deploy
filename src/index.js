@@ -19,14 +19,24 @@ const formattedRef = () => {
   return ref;
 };
 
+const getSourceUrl = () => {
+  const { ref, event_name, head_ref, serverUrl, repo } = github.context;
+  const requiredRef = event_name ==='pull_request' ? `refs/heads/${head_ref}` : ref
+
+  return `${serverUrl}/${repo.owner}/${repo.repo}/archive/${requiredRef}.tar.gz`
+}
+
 const main = async () => {
   try {
     const { token } = await getBearerToken();
     const ref = formattedRef();
-    core.debug(`Bearer token: ${token}`);
-    core.debug(`Ref: ${ref}`);
+    const sourceUrl = getSourceUrl()
 
-    await createDeployment(token, formattedRef());
+    core.debug(`Bearer token: ${token}`);
+    core.info(`Ref: ${ref}`);
+    core.info(`Source URL: ${sourceUrl}`);
+
+    await createDeployment(token, ref, sourceUrl);
   } catch (err) {
     core.error(err);
   }
