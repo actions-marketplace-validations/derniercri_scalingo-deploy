@@ -1,0 +1,19 @@
+name: Scalingo Deploy
+description: Trigger a deployment to Scalingo
+inputs:
+  token:
+    description: Your Scalingo API Token (generate it in your profile settings)
+    required: true
+  apiUrl:
+    description: Scalingo's base API URL
+    required: true
+    default: https://api.osc-fr1.scalingo.com
+  appName:
+    description: Your Scalingo application name
+    required: true
+# outputs:
+#   time: # id of output
+#     description: 'The time we greeted you'
+runs:
+  using: node20
+  main: src/index.js

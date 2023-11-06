@@ -1,0 +1,20 @@
+{
+  "name": "scalingo-deploy",
+  "version": "0.0.1",
+  "description": "Trigger a deployment to your Scalingo app",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2"
+  },
+  "scripts": {
+    "lint": "eslint 'src/**/*.js'",
+    "lint:fix": "yarn lint --fix"
+  }
+}
