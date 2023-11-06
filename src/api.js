@@ -1,14 +1,9 @@
 const core = require('@actions/core');
 const { apiUrl, token, appName } = require('./constants');
 
-const createDeployment = (bearerToken, gitRef, sourceUrl) => fetch(`${apiUrl}/v1/apps/${appName}/deployments`, {
+const createDeployment = (bearerToken, gitRef) => fetch(`${apiUrl}/v1/apps/${appName}/deployments`, {
   method: 'POST',
-  body: JSON.stringify({
-    deployment: {
-      git_ref: gitRef,
-      source_url: sourceUrl,
-    },
-  }),
+  body: JSON.stringify({ deployment: { git_ref: gitRef } }),
   headers: {
     Authorization: `Bearer ${bearerToken}`,
     'Content-Type': 'application/json',

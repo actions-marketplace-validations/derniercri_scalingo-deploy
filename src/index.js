@@ -24,7 +24,7 @@ const main = async () => {
     core.info(`Sha: ${sha}`);
     core.info(`Source URL: ${sourceUrl}`);
 
-    await createDeployment(token, sha, sourceUrl);
+    await createDeployment(token, sha);
   } catch (err) {
     core.error(err);
   }
