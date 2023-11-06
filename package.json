@@ -1,6 +1,6 @@
 {
   "name": "scalingo-deploy",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Trigger a deployment to your Scalingo app",
   "main": "index.js",
   "license": "MIT",
