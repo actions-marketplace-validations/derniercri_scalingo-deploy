@@ -1,6 +1,6 @@
 {
   "name": "scalingo-deploy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Trigger a deployment to your Scalingo app",
   "main": "index.js",
   "license": "MIT",
@@ -9,12 +9,14 @@
     "@actions/github": "^6.0.0"
   },
   "devDependencies": {
+    "@vercel/ncc": "^0.38.1",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.2"
   },
   "scripts": {
-    "lint": "eslint 'src/**/*.js'",
+    "preversion": "yarn ncc build src/index.js -o dist --minify",
+    "lint": "yarn eslint 'src/**/*.js'",
     "lint:fix": "yarn lint --fix"
   }
 }
