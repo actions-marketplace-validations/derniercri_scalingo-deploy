@@ -3,10 +3,10 @@ const github = require('@actions/github');
 const { createDeployment, getBearerToken } = require('./api');
 
 const formattedRef = () => {
-  const { ref, eventName, headRef } = github.context;
+  const { ref, eventName } = github.context;
 
   if (eventName === 'pull_request') {
-    return headRef;
+    return process.env.GITHUB_HEAD_REF;
   }
 
   if (ref.startsWith('refs/heads/')) {
@@ -20,18 +20,23 @@ const formattedRef = () => {
 };
 
 const getSourceUrl = () => {
-  const { ref, eventName, headRef, serverUrl, repo } = github.context;
+  const {
+    ref,
+    eventName,
+    serverUrl,
+    repo,
+  } = github.context;
 
-  const requiredRef = eventName ==='pull_request' ? `refs/heads/${headRef}` : ref
+  const requiredRef = eventName === 'pull_request' ? `refs/heads/${process.env.GITHUB_HEAD_REF}` : ref;
 
-  return `${serverUrl}/${repo.owner}/${repo.repo}/archive/${requiredRef}.tar.gz`
-}
+  return `${serverUrl}/${repo.owner}/${repo.repo}/archive/${requiredRef}.tar.gz`;
+};
 
 const main = async () => {
   try {
     const { token } = await getBearerToken();
     const ref = formattedRef();
-    const sourceUrl = getSourceUrl()
+    const sourceUrl = getSourceUrl();
 
     core.debug(`Bearer token: ${token}`);
     core.info(`Ref: ${ref}`);

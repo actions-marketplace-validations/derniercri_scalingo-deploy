@@ -1,5 +1,4 @@
 const core = require('@actions/core');
-const github = require('@actions/github');
 const { apiUrl, token, appName } = require('./constants');
 
 const createDeployment = (bearerToken, gitRef, sourceUrl) => fetch(`${apiUrl}/v1/apps/${appName}/deployments`, {
