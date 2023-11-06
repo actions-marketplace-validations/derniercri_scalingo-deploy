@@ -21,6 +21,7 @@ const main = async () => {
     const ref = formattedRef();
     core.debug(`Bearer token: ${token}`);
     core.debug(`Ref: ${ref}`);
+    core.debug('Context: ', github.context);
 
     await createDeployment(token, formattedRef());
   } catch (err) {

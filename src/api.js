@@ -1,3 +1,4 @@
+const core = require('@actions/core');
 const github = require('@actions/github');
 const { apiUrl, token, appName } = require('./constants');
 
@@ -13,7 +14,9 @@ const createDeployment = (bearerToken, gitRef) => fetch(`${apiUrl}/v1/apps/${app
     Authorization: `Bearer ${bearerToken}`,
     'Content-Type': 'application/json',
   },
-});
+})
+  .then(core.debug)
+  .then((res) => res.json());
 
 const getBearerToken = () => fetch('https://auth.scalingo.com/v1/tokens/exchange', {
   method: 'POST',
