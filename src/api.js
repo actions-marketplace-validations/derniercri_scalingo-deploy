@@ -15,7 +15,10 @@ const createDeployment = (bearerToken, gitRef) => fetch(`${apiUrl}/v1/apps/${app
     'Content-Type': 'application/json',
   },
 })
-  .then(core.debug)
+  .then((res) => {
+    core.debug(res);
+    return res;
+  })
   .then((res) => res.json());
 
 const getBearerToken = () => fetch('https://auth.scalingo.com/v1/tokens/exchange', {
